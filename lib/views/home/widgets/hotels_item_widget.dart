@@ -1,10 +1,8 @@
 import 'package:kpksmartguide/theme/app_decoration.dart';
-import 'package:kpksmartguide/theme/custom_button_style.dart';
 import 'package:kpksmartguide/theme/custom_text_style.dart';
 import 'package:kpksmartguide/theme/theme_helper.dart';
 import 'package:kpksmartguide/utils/image_constant.dart';
 import 'package:kpksmartguide/utils/size_utils.dart';
-import 'package:kpksmartguide/views/widgets/custom_elevated_button.dart';
 import 'package:kpksmartguide/views/widgets/custom_image_widget.dart';
 
 import 'package:flutter/material.dart';
@@ -39,22 +37,6 @@ class HotelsItemWidget extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                // CustomElevatedButton(
-                //   height: 32.v,
-                //   width: 90.h,
-                //   text: "4.8",
-                //   margin: EdgeInsets.only(right: 23.h),
-                //   leftIcon: Container(
-                //     margin: EdgeInsets.only(right: 8.h),
-                //     child: CustomImageView(
-                //       imagePath: ImageConstant.starIcon,
-                //       height: mediaQueryData.size.height * 0.02,
-                //       width: mediaQueryData.size.height * 0.02,
-                //     ),
-                //   ),
-                //   buttonStyle: CustomButtonStyles.fillPrimaryTL16,
-                //   buttonTextStyle: CustomTextStyles.titleSmallWhiteA700,
-                // ),
                 Container(
                   margin: EdgeInsets.only(right: 23.h),
                   padding: EdgeInsets.symmetric(
@@ -65,9 +47,6 @@ class HotelsItemWidget extends StatelessWidget {
                     color: theme.colorScheme.primary,
                     borderRadius: BorderRadius.circular(16.h),
                   ),
-                  // AppDecoration.gradient.copyWith(
-                  //   borderRadius: BorderRadiusStyle.circleBorder70,
-                  // ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -131,11 +110,21 @@ class HotelsItemWidget extends StatelessWidget {
                             ),
                           ),
                           Spacer(),
-                          CustomImageView(
-                            imagePath: ImageConstant.splashImage,
-                            height: 28.adaptSize,
-                            width: 28.adaptSize,
-                            margin: EdgeInsets.only(bottom: 3.v),
+                          // container and inside a ticket icon
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 8.h,
+                              vertical: 4.v,
+                            ),
+                            // decoration: BoxDecoration(
+                            //   color: theme.colorScheme.primary,
+                            //   borderRadius: BorderRadius.circular(16.h),
+                            // ),
+                            child: Icon(
+                              Icons.hotel_class_outlined,
+                              color: Colors.white,
+                              size: 28.adaptSize,
+                            ),
                           ),
                         ],
                       ),
