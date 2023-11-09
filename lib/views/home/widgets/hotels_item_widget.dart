@@ -11,9 +11,8 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class HotelsItemWidget extends StatelessWidget {
-  HotelsItemWidget({
-    Key? key,
-  }) : super(
+  const HotelsItemWidget({Key? key})
+      : super(
           key: key,
         );
 
@@ -40,21 +39,50 @@ class HotelsItemWidget extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                CustomElevatedButton(
-                  height: 32.v,
-                  width: 71.h,
-                  text: "lbl_4_8",
+                // CustomElevatedButton(
+                //   height: 32.v,
+                //   width: 90.h,
+                //   text: "4.8",
+                //   margin: EdgeInsets.only(right: 23.h),
+                //   leftIcon: Container(
+                //     margin: EdgeInsets.only(right: 8.h),
+                //     child: CustomImageView(
+                //       imagePath: ImageConstant.starIcon,
+                //       height: mediaQueryData.size.height * 0.02,
+                //       width: mediaQueryData.size.height * 0.02,
+                //     ),
+                //   ),
+                //   buttonStyle: CustomButtonStyles.fillPrimaryTL16,
+                //   buttonTextStyle: CustomTextStyles.titleSmallWhiteA700,
+                // ),
+                Container(
                   margin: EdgeInsets.only(right: 23.h),
-                  leftIcon: Container(
-                    margin: EdgeInsets.only(right: 8.h),
-                    child: CustomImageView(
-                      imagePath: ImageConstant.splashImage,
-                      height: 12.adaptSize,
-                      width: 12.adaptSize,
-                    ),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 8.h,
+                    vertical: 4.v,
                   ),
-                  buttonStyle: CustomButtonStyles.fillPrimaryTL16,
-                  buttonTextStyle: CustomTextStyles.titleSmallWhiteA700,
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.primary,
+                    borderRadius: BorderRadius.circular(16.h),
+                  ),
+                  // AppDecoration.gradient.copyWith(
+                  //   borderRadius: BorderRadiusStyle.circleBorder70,
+                  // ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CustomImageView(
+                        imagePath: ImageConstant.starIcon,
+                        height: 18.adaptSize,
+                        width: 18.adaptSize,
+                      ),
+                      SizedBox(width: 4.h),
+                      Text(
+                        '4.8',
+                        style: CustomTextStyles.titleSmallWhiteA700,
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(height: 172.v),
                 Container(
@@ -72,12 +100,12 @@ class HotelsItemWidget extends StatelessWidget {
                     children: [
                       SizedBox(height: 16.v),
                       Text(
-                        'some text',
+                        'Hotel Name',
                         style: theme.textTheme.headlineSmall,
                       ),
                       SizedBox(height: 15.v),
                       Text(
-                        'some text',
+                        'Address of the hotel',
                         style: theme.textTheme.bodyLarge,
                       ),
                       SizedBox(height: 10.v),
@@ -87,7 +115,7 @@ class HotelsItemWidget extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.only(top: 2.v),
                             child: Text(
-                              'Some Text here ',
+                              'Rs.2000 ',
                               style: theme.textTheme.headlineSmall,
                             ),
                           ),
@@ -98,7 +126,7 @@ class HotelsItemWidget extends StatelessWidget {
                               bottom: 5.v,
                             ),
                             child: Text(
-                              'some text',
+                              '/night',
                               style: CustomTextStyles.bodyMediumWhiteA700,
                             ),
                           ),

@@ -24,11 +24,15 @@ class HomeScreen extends StatelessWidget {
               child: const Text("Drawer Header"),
             ),
             ListTile(
-              title: const Text("Item 1"),
+              title: const Text("Places to Visit"),
               onTap: () {},
             ),
+            Divider(
+              height: 1,
+              thickness: 1,
+            ),
             ListTile(
-              title: Text("Item 2"),
+              title: const Text("Hotels to stay"),
               onTap: () {},
             ),
           ]),
@@ -114,33 +118,41 @@ class HomeScreen extends StatelessWidget {
 
   /// Section Widget
   Widget _buildRecentlyBooked() {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Padding(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
           padding: EdgeInsets.only(right: 24.h),
-          child:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Text("lbl_recently_booked".tr, style: theme.textTheme.titleMedium),
-            GestureDetector(
-                onTap: () {
-                  onTapTxtSeeAll();
-                },
-                child: Text("lbl_see_all".tr,
-                    style: CustomTextStyles.titleMediumPrimary16))
-          ])),
-      SizedBox(height: 16.v),
-      Padding(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Recently Booked".tr, style: theme.textTheme.titleMedium),
+              GestureDetector(
+                  onTap: () {
+                    onTapTxtSeeAll();
+                  },
+                  child: Text("See All".tr,
+                      style: CustomTextStyles.titleMediumPrimary16))
+            ],
+          ),
+        ),
+        SizedBox(height: 16.v),
+        Padding(
           padding: EdgeInsets.only(right: 24.h),
           child: ListView.separated(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              separatorBuilder: (context, index) {
-                return SizedBox(height: 24.v);
-              },
-              itemCount: 4,
-              itemBuilder: (context, index) {
-                return MartinezcannesItemWidget();
-              }))
-    ]);
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            separatorBuilder: (context, index) {
+              return SizedBox(height: 24.v);
+            },
+            itemCount: 4,
+            itemBuilder: (context, index) {
+              return MartinezcannesItemWidget();
+            },
+          ),
+        ),
+      ],
+    );
   }
 
   /// Navigates to the recentlyBookedScreen when the action is triggered.

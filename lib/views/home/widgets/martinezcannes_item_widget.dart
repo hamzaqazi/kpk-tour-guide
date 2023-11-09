@@ -8,7 +8,7 @@ import 'package:kpksmartguide/views/widgets/custom_image_widget.dart';
 
 // ignore: must_be_immutable
 class MartinezcannesItemWidget extends StatelessWidget {
-  MartinezcannesItemWidget({
+  const MartinezcannesItemWidget({
     Key? key,
   }) : super(
           key: key,
@@ -39,19 +39,19 @@ class MartinezcannesItemWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'somr text',
+                  'Hotel Name',
                   style: theme.textTheme.titleLarge,
                 ),
                 SizedBox(height: 18.v),
                 Text(
-                  'Some text',
+                  'Address of the hotel',
                   style: theme.textTheme.bodyMedium,
                 ),
                 SizedBox(height: 12.v),
                 Row(
                   children: [
                     CustomImageView(
-                      imagePath: ImageConstant.splashImage,
+                      imagePath: ImageConstant.starIcon,
                       height: 12.adaptSize,
                       width: 12.adaptSize,
                       margin: EdgeInsets.symmetric(vertical: 2.v),
@@ -59,7 +59,7 @@ class MartinezcannesItemWidget extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(left: 4.h),
                       child: Text(
-                        'Some text',
+                        '3.9',
                         style: theme.textTheme.titleSmall,
                       ),
                     ),
@@ -69,7 +69,7 @@ class MartinezcannesItemWidget extends StatelessWidget {
                         top: 1.v,
                       ),
                       child: Text(
-                        'Some text',
+                        '(2,145 Reviews)',
                         style: theme.textTheme.bodySmall,
                       ),
                     ),
@@ -87,19 +87,35 @@ class MartinezcannesItemWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  'Some text',
+                  'Rs.2000',
                   style: CustomTextStyles.headlineSmallPrimary,
                 ),
                 SizedBox(height: 2.v),
                 Text(
-                  'Some text',
+                  '/night',
                   style: theme.textTheme.labelMedium,
                 ),
                 SizedBox(height: 16.v),
-                CustomImageView(
-                  imagePath: ImageConstant.onBoarding2,
-                  height: 24.adaptSize,
-                  width: 24.adaptSize,
+                Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16.h,
+                    vertical: 8.v,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16.h),
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        appTheme.blueGray900,
+                        appTheme.cyan900,
+                      ],
+                    ),
+                  ),
+                  child: Text(
+                    'Book Now',
+                    style: CustomTextStyles.titleSmallWhiteA700,
+                  ),
                 ),
               ],
             ),
