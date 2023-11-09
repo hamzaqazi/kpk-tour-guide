@@ -18,13 +18,13 @@ class HomeScreen extends StatelessWidget {
         drawer: Drawer(
           child: ListView(children: [
             DrawerHeader(
-              child: Text("Drawer Header"),
               decoration: BoxDecoration(
                 color: theme.colorScheme.primary,
               ),
+              child: const Text("Drawer Header"),
             ),
             ListTile(
-              title: Text("Item 1"),
+              title: const Text("Item 1"),
               onTap: () {},
             ),
             ListTile(
