@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1073371290212",
+    "project_id": "kpksmartguide",
+    "storage_bucket": "kpksmartguide.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1073371290212:android:14f82fb9e84474eafb5d71",
+        "android_client_info": {
+          "package_name": "com.example.kpksmartguide"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOyxoC3FqKLQlVaz7zOIgNhZ0fKZd9NaY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

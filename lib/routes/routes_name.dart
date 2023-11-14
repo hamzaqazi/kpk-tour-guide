@@ -5,4 +5,6 @@ class RoutesNames {
   static const String onBoarding2 = '/onBoarding2';
   static const String onBoarding3 = '/onBoarding3';
   static const String login = '/login';
+  static const String places = '/places';
+  static const String hotels = '/hotels';
 }

@@ -1,6 +1,11 @@
 // ignore_for_file: must_be_immutable
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kpksmartguide/routes/routes_name.dart';
 import 'package:kpksmartguide/theme/custom_text_style.dart';
 import 'package:kpksmartguide/theme/theme_helper.dart';
 import 'package:kpksmartguide/utils/size_utils.dart';
@@ -21,11 +26,14 @@ class HomeScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 color: theme.colorScheme.primary,
               ),
-              child: const Text("Drawer Header"),
+              child:
+                  Text("KPK Smart Guide", style: CustomTextStyles.bodyLarge18),
             ),
             ListTile(
               title: const Text("Places to Visit"),
-              onTap: () {},
+              onTap: () {
+                Get.toNamed(RoutesNames.places);
+              },
             ),
             Divider(
               height: 1,
@@ -33,7 +41,9 @@ class HomeScreen extends StatelessWidget {
             ),
             ListTile(
               title: const Text("Hotels to stay"),
-              onTap: () {},
+              onTap: () {
+                Get.toNamed(RoutesNames.hotels);
+              },
             ),
           ]),
         ),
@@ -105,15 +115,37 @@ class HomeScreen extends StatelessWidget {
   Widget _buildHotels() {
     return SizedBox(
         height: 400.v,
-        child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            separatorBuilder: (context, index) {
-              return SizedBox(width: 24.h);
-            },
-            itemCount: 4,
-            itemBuilder: (context, index) {
-              return HotelsItemWidget();
-            }));
+        child: StreamBuilder(
+          stream: FirebaseFirestore.instance.collection('places').snapshots(),
+          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (!snapshot.hasData) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            List<DocumentSnapshot> places = snapshot.data!.docs;
+
+            return ListView.separated(
+              separatorBuilder: (context, index) {
+                return SizedBox(width: 24.h);
+              },
+              scrollDirection: Axis.horizontal,
+              itemCount: snapshot.data!.docs.length,
+              itemBuilder: (context, index) {
+                Map<String, dynamic> placeData =
+                    places[index].data() as Map<String, dynamic>;
+                log(placeData.toString());
+
+                return HotelsItemWidget(
+                  name: placeData['name'],
+                  description: placeData['description'],
+                  address: placeData['address'],
+                  images: placeData['images'],
+                );
+              },
+            );
+          },
+        ));
   }
 
   /// Section Widget
@@ -126,7 +158,7 @@ class HomeScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Recently Booked".tr, style: theme.textTheme.titleMedium),
+              Text("Hotels To Stay".tr, style: theme.textTheme.titleMedium),
               GestureDetector(
                   onTap: () {
                     onTapTxtSeeAll();
