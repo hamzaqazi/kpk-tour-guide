@@ -31,14 +31,14 @@ class HotelsItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 400.v,
+      height: 450.v,
       width: 300.h,
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
           CustomImageView(
             imagePath: images![0],
-            height: 400.v,
+            height: 450.v,
             width: 300.h,
             radius: BorderRadius.circular(
               36.h,
@@ -110,7 +110,7 @@ class HotelsItemWidget extends StatelessWidget {
                 //     ],
                 //   ),
                 // ),
-                SizedBox(height: 230.v),
+                SizedBox(height: 290.v),
                 Container(
                   padding: EdgeInsets.symmetric(
                     horizontal: 18.h,

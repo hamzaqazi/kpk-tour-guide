@@ -8,8 +8,19 @@ import 'package:kpksmartguide/views/widgets/custom_image_widget.dart';
 
 // ignore: must_be_immutable
 class MartinezcannesItemWidget extends StatelessWidget {
-  const MartinezcannesItemWidget({
+  String? name;
+  String? address;
+  double? price;
+  double? rating;
+  List<String>? images;
+
+  MartinezcannesItemWidget({
     Key? key,
+    this.name,
+    this.address,
+    this.price,
+    this.rating,
+    this.images,
   }) : super(
           key: key,
         );
@@ -21,82 +32,87 @@ class MartinezcannesItemWidget extends StatelessWidget {
       decoration: AppDecoration.outlineBlackC.copyWith(
         borderRadius: BorderRadiusStyle.roundedBorder16,
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        // mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          CustomImageView(
-            imagePath: ImageConstant.onBoarding2,
-            height: 100.adaptSize,
-            width: 100.adaptSize,
-            radius: BorderRadius.circular(
-              16.h,
-            ),
-            margin: EdgeInsets.symmetric(vertical: 1.v),
-          ),
-          Padding(
-            padding: EdgeInsets.only(bottom: 11.v),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Hotel Name',
-                  style: theme.textTheme.titleLarge,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              CustomImageView(
+                imagePath: images?.first ?? ImageConstant.splashImage,
+                height: 100.adaptSize,
+                width: 100.adaptSize,
+                radius: BorderRadius.circular(
+                  16.h,
                 ),
-                SizedBox(height: 18.v),
-                Text(
-                  'Address of the hotel',
-                  style: theme.textTheme.bodyMedium,
-                ),
-                SizedBox(height: 12.v),
-                Row(
+                margin: EdgeInsets.symmetric(vertical: 1.v),
+              ),
+              Container(
+                width: mediaQueryData.size.width * 0.7,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomImageView(
-                      imagePath: ImageConstant.starIcon,
-                      height: 12.adaptSize,
-                      width: 12.adaptSize,
-                      margin: EdgeInsets.symmetric(vertical: 2.v),
+                    Text(name ?? '', style: theme.textTheme.headlineSmall),
+                    // SizedBox(height: 18.v),
+                    Text(
+                      address ?? '',
+                      style: theme.textTheme.bodyMedium,
+                      overflow: TextOverflow.clip,
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 4.h),
-                      child: Text(
-                        '3.9',
-                        style: theme.textTheme.titleSmall,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: 8.h,
-                        top: 1.v,
-                      ),
-                      child: Text(
-                        '(2,145 Reviews)',
-                        style: theme.textTheme.bodySmall,
-                      ),
-                    ),
+                    SizedBox(height: 12.v),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
           Padding(
-            padding: EdgeInsets.only(
-              top: 10.v,
-              bottom: 8.v,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
               children: [
+                CustomImageView(
+                  imagePath: ImageConstant.starIcon,
+                  height: 12.adaptSize,
+                  width: 12.adaptSize,
+                  margin: EdgeInsets.symmetric(vertical: 2.v),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 4.h),
+                  child: Text(
+                    '${rating ?? ''}',
+                    style: theme.textTheme.titleSmall,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: 8.h,
+                    top: 1.v,
+                  ),
+                  child: Text(
+                    '(2,145 Reviews)',
+                    style: theme.textTheme.bodySmall,
+                  ),
+                ),
+                Spacer(),
                 Text(
-                  'Rs.2000',
+                  'Rs. ${price ?? ''}',
                   style: CustomTextStyles.headlineSmallPrimary,
                 ),
                 SizedBox(height: 2.v),
                 Text(
                   '/night',
-                  style: theme.textTheme.labelMedium,
+                  style: theme.textTheme.labelLarge,
                 ),
-                SizedBox(height: 16.v),
-                Container(
+              ],
+            ),
+          ),
+          Row(
+            children: [
+              Container(),
+              Spacer(),
+              Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Container(
                   padding: EdgeInsets.symmetric(
                     horizontal: 16.h,
                     vertical: 8.v,
@@ -117,8 +133,8 @@ class MartinezcannesItemWidget extends StatelessWidget {
                     style: CustomTextStyles.titleSmallWhiteA700,
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       ),

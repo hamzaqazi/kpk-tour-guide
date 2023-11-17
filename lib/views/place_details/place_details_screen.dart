@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kpksmartguide/theme/custom_text_style.dart';
 import 'package:kpksmartguide/theme/theme_helper.dart';
+import 'package:kpksmartguide/utils/size_utils.dart';
 import 'package:kpksmartguide/views/place_details/place_details_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../home/widgets/martinezcannes_item_widget.dart';
 
 class PlaceDetailsScreen extends StatelessWidget {
   // controller
@@ -17,13 +20,15 @@ class PlaceDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      // resizeToAvoidBottomInset: false,
+      backgroundColor: theme.colorScheme.background,
       appBar: AppBar(
         title: Obx(() => Text(controller.name.value)),
       ),
       body: SingleChildScrollView(
         child: Container(
-          height: Get.height,
+          // screen height
+          // height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
@@ -194,11 +199,104 @@ class PlaceDetailsScreen extends StatelessWidget {
                 ),
                 // opne google map button
               ),
-              // Spacer(),
+              SizedBox(height: 16),
+              // Hotels to stay section
+              Obx(
+                () => _buildHotelsToStay(),
+              ),
+
+              // Padding(
+              //   padding: const EdgeInsets.only(left: 16.0),
+              //   child: Text('Hotels', style: CustomTextStyles.bodyLarge30),
+              // ),
+              // Padding(
+              //     padding: EdgeInsets.all(16),
+              //     child: Obx(() {
+              //       if (controller.filteredHotels.value.isEmpty) {
+              //         return Text('No hotels found',
+              //             style: CustomTextStyles.bodyMediumGray50);
+              //       } else {
+              //         return ListView.builder(
+              //           shrinkWrap: true,
+              //           physics: NeverScrollableScrollPhysics(),
+              //           itemCount: controller.filteredHotels.value.length,
+              //           itemBuilder: (context, index) {
+              //             return Card(
+              //               child: ListTile(
+              //                 leading: Icon(Icons.hotel,
+              //                     color: theme.colorScheme.primary),
+              //                 title: Text(
+              //                   controller.filteredHotels.value[index].name,
+              //                   style: CustomTextStyles.bodyMediumGray50,
+              //                 ),
+              //                 subtitle: Text(
+              //                   controller.filteredHotels.value[index].address,
+              //                   style: CustomTextStyles.bodyMediumGray50,
+              //                 ),
+              //                 trailing: Text(
+              //                   'Rs. ${controller.filteredHotels.value[index].price}',
+              //                   style: CustomTextStyles.bodyMediumGray50,
+              //                 ),
+              //               ),
+              //             );
+              //           },
+              //         );
+              //       }
+              //     })),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  // Hotels to stay section
+  Widget _buildHotelsToStay() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(right: 24.h, left: 16.h),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Hotels in ${controller.name} ".tr,
+                  style: theme.textTheme.titleMedium),
+              GestureDetector(
+                  onTap: () {},
+                  child: Text("See All".tr,
+                      style: CustomTextStyles.titleMediumPrimary16))
+            ],
+          ),
+        ),
+        SizedBox(height: 16.v),
+        controller.filteredHotels.value.isEmpty
+            ? Container(
+                padding: EdgeInsets.only(right: 24.h),
+                height: 100,
+                child: Center(
+                  child: Text('No hotels found in this place',
+                      style: CustomTextStyles.bodyMediumGray50),
+                ),
+              )
+            : ListView.separated(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                separatorBuilder: (context, index) {
+                  return SizedBox(height: 24.v);
+                },
+                itemCount: controller.filteredHotels.value.length,
+                itemBuilder: (context, index) {
+                  return MartinezcannesItemWidget(
+                    images: controller.filteredHotels.value[index].images,
+                    name: controller.filteredHotels.value[index].name,
+                    address: controller.filteredHotels.value[index].address,
+                    price: controller.filteredHotels.value[index].price,
+                    rating: controller.filteredHotels.value[index].rating,
+                  );
+                },
+              ),
+      ],
     );
   }
 }

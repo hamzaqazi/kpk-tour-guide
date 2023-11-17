@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:kpksmartguide/views/hotels/hotels_model.dart';
 
 class HotelsService {
   final CollectionReference _hotelsCollection =
@@ -17,13 +18,14 @@ class HotelsService {
   }
 
   // getHotels method returns a Hotel object
-  Future<QuerySnapshot<Object?>> getHotels() async {
+  Future<List<Hotel>> getHotels() async {
     var hotel = await _hotelsCollection.get();
+    List<Hotel> hotels = [];
     hotel.docs.forEach((element) {
-      print(element.data());
+      hotels.add(Hotel.fromMap(element.data() as Map<String, dynamic>));
     });
 
-    return _hotelsCollection.get();
+    return hotels;
   }
 
   // getHotelById method returns a Hotel object

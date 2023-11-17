@@ -10,10 +10,12 @@ import 'package:kpksmartguide/theme/custom_text_style.dart';
 import 'package:kpksmartguide/theme/theme_helper.dart';
 import 'package:kpksmartguide/utils/image_constant.dart';
 import 'package:kpksmartguide/utils/size_utils.dart';
+import 'package:kpksmartguide/views/home/home_controller.dart';
 import 'package:kpksmartguide/views/home/widgets/hotels_item_widget.dart';
 import 'package:kpksmartguide/views/home/widgets/martinezcannes_item_widget.dart';
 
 class HomeScreen extends StatelessWidget {
+  HomeController controller = Get.put(HomeController());
   HomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -98,15 +100,32 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(height: 30.v),
+                  Padding(
+                    padding: EdgeInsets.only(right: 24.h, left: 24.h),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Places to visit".tr,
+                            style: theme.textTheme.titleMedium),
+                        GestureDetector(
+                            onTap: () {
+                              onTapTxtSeeAll();
+                            },
+                            child: Text("See All".tr,
+                                style: CustomTextStyles.titleMediumPrimary16))
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 16.v),
                   Align(
                     alignment: Alignment.centerRight,
                     child: Padding(
-                      padding: EdgeInsets.only(left: 24.h),
+                      padding: EdgeInsets.all(5.h),
                       child: Column(
                         children: [
                           _buildHotels(),
                           SizedBox(height: 34.v),
-                          _buildRecentlyBooked()
+                          Obx(() => _buildRecentlyBooked()),
                         ],
                       ),
                     ),
@@ -123,7 +142,7 @@ class HomeScreen extends StatelessWidget {
   /// Section Widget
   Widget _buildHotels() {
     return SizedBox(
-        height: 400.v,
+        height: 450.v,
         child: StreamBuilder(
           stream: FirebaseFirestore.instance.collection('places').snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -163,11 +182,11 @@ class HomeScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.only(right: 24.h),
+          padding: EdgeInsets.only(right: 24.h, left: 24.h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Hotels To Stay".tr, style: theme.textTheme.titleMedium),
+              Text("Hotels to stay".tr, style: theme.textTheme.titleMedium),
               GestureDetector(
                   onTap: () {
                     onTapTxtSeeAll();
@@ -178,19 +197,22 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         SizedBox(height: 16.v),
-        Padding(
-          padding: EdgeInsets.only(right: 24.h),
-          child: ListView.separated(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            separatorBuilder: (context, index) {
-              return SizedBox(height: 24.v);
-            },
-            itemCount: 4,
-            itemBuilder: (context, index) {
-              return MartinezcannesItemWidget();
-            },
-          ),
+        ListView.separated(
+          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          separatorBuilder: (context, index) {
+            return SizedBox(height: 24.v);
+          },
+          itemCount: controller.hotels.value.length,
+          itemBuilder: (context, index) {
+            return MartinezcannesItemWidget(
+              name: controller.hotels.value[index].name,
+              address: controller.hotels.value[index].address,
+              price: controller.hotels.value[index].price,
+              rating: controller.hotels.value[index].rating,
+              images: controller.hotels.value[index].images,
+            );
+          },
         ),
       ],
     );

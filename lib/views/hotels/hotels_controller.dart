@@ -15,31 +15,21 @@ class HotelsController extends GetxController {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
+  final TextEditingController ratingController = TextEditingController();
   Rx<List<File>> selectedImages = Rx<List<File>>([]);
 
   RxString selectedPlace = RxString('');
 
   // list of place
   List<Place> places = [];
-
-  // get a list of dropdown menu items from places
-  List<DropdownMenuItem<String>> getDropDownMenuItems() {
-    List<DropdownMenuItem<String>> items = [];
-    for (Place place in places) {
-      items.add(
-        DropdownMenuItem(
-          value: place.name,
-          child: Text(place.name),
-        ),
-      );
-    }
-    return items;
-  }
+  Rx<List<DropdownMenuItem<String>>> items =
+      Rx<List<DropdownMenuItem<String>>>([]); // list of dropdown menu items
 
   @override
   void onInit() async {
     PlacesService placesService = PlacesService();
     places = await placesService.getPlaces();
+    items.value = getDropDownMenuItems();
     log(places.toString());
     super.onInit();
 
@@ -80,6 +70,7 @@ class HotelsController extends GetxController {
     Hotel hotel = Hotel(
       name: nameController.text,
       price: double.parse(priceController.text),
+      rating: double.parse(ratingController.text),
       address: addressController.text,
       images: imageUrls,
       placeID: selectedPlace.value,
@@ -109,5 +100,19 @@ class HotelsController extends GetxController {
 
     // Show a success message or navigate to a new screen
     // ...
+  }
+
+  List<DropdownMenuItem<String>> getDropDownMenuItems() {
+    List<DropdownMenuItem<String>> items = [];
+    places.forEach((element) {
+      items.add(
+        DropdownMenuItem(
+          child: Text(element.name),
+          value: element.name,
+        ),
+      );
+    });
+
+    return items;
   }
 }

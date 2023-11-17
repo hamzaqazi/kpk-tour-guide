@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
+import 'package:kpksmartguide/views/hotels/hotels_model.dart';
 import 'package:kpksmartguide/views/hotels/hotels_service.dart';
 
 class PlaceDetailsController extends GetxController {
@@ -7,9 +10,11 @@ class PlaceDetailsController extends GetxController {
   RxString description = ''.obs;
   RxList images = [].obs;
   RxString address = ''.obs;
+  Rx<List<Hotel>> filteredHotels = Rx<List<Hotel>>([]);
+  Rx<List<Hotel>> hotels = Rx<List<Hotel>>([]);
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
     // Get the arguments
     name.value = Get.arguments['name'];
@@ -18,8 +23,13 @@ class PlaceDetailsController extends GetxController {
     address.value = Get.arguments['address'];
 
     HotelsService hotelsService = HotelsService();
-    hotelsService.getHotels().then((value) {
-      // make a lits of hotels.placeID match with name.value
-    });
+    hotels.value = await hotelsService.getHotels();
+    if (name.value.isNotEmpty) {
+      filteredHotels.value = hotels.value
+          .where((element) => element.placeID == name.value)
+          .toList();
+    }
+
+    log(filteredHotels.toString());
   }
 }

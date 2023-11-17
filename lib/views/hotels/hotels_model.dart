@@ -2,6 +2,7 @@ class Hotel {
   String name;
   String address;
   double price;
+  double? rating;
   double? lat;
   double? lon;
   String? placeID;
@@ -11,6 +12,7 @@ class Hotel {
     required this.name,
     required this.address,
     required this.price,
+    this.rating,
     this.lat,
     this.lon,
     this.placeID,
@@ -22,6 +24,7 @@ class Hotel {
       'name': name,
       'address': address,
       'price': price,
+      'rating': rating,
       'lat': lat,
       'lon': lon,
       'placeID': placeID,
@@ -34,6 +37,7 @@ class Hotel {
       name: map['name'],
       address: map['address'],
       price: map['price'],
+      rating: map['rating'],
       lat: map['lat'],
       lon: map['lon'],
       placeID: map['placeID'],
