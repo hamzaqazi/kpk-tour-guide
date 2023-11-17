@@ -11,6 +11,11 @@ class CustomTextStyles {
   static get bodyLarge18 => theme.textTheme.bodyLarge!.copyWith(
         fontSize: 18.fSize,
       );
+  // body large 30
+  static get bodyLarge30 => theme.textTheme.bodyLarge!.copyWith(
+        fontSize: 30.fSize,
+        fontWeight: FontWeight.w700,
+      );
   static get bodyLargeGray40001 => theme.textTheme.bodyLarge!.copyWith(
         color: appTheme.gray40001,
       );

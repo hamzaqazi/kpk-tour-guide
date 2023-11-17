@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:kpksmartguide/routes/routes_name.dart';
 import 'package:kpksmartguide/theme/app_decoration.dart';
 import 'package:kpksmartguide/theme/custom_text_style.dart';
 import 'package:kpksmartguide/theme/theme_helper.dart';
@@ -51,52 +52,88 @@ class HotelsItemWidget extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Container(
-                  margin: EdgeInsets.only(right: 17.h),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 8.h,
-                    vertical: 4.v,
-                  ),
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.primary,
-                    borderRadius: BorderRadius.circular(16.h),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      CustomImageView(
-                        imagePath: ImageConstant.starIcon,
-                        height: 18.adaptSize,
-                        width: 18.adaptSize,
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed(RoutesNames.placeDetails, arguments: {
+                      'name': name,
+                      'description': description,
+                      'address': address,
+                      'images': images,
+                    });
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(right: 17.h),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16.h,
+                      vertical: 8.v,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16.h),
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          appTheme.blueGray900,
+                          appTheme.cyan900,
+                        ],
                       ),
-                      SizedBox(width: 4.h),
-                      Text(
-                        '4.8',
-                        style: CustomTextStyles.titleSmallWhiteA700,
-                      ),
-                    ],
+                    ),
+                    child: Text(
+                      'See Details',
+                      style: CustomTextStyles.titleSmallWhiteA700,
+                    ),
                   ),
                 ),
-                SizedBox(height: 142.v),
+                // Container(
+                //   margin: EdgeInsets.only(right: 17.h),
+                //   padding: EdgeInsets.symmetric(
+                //     horizontal: 8.h,
+                //     vertical: 4.v,
+                //   ),
+                //   decoration: BoxDecoration(
+                //     color: theme.colorScheme.primary,
+                //     borderRadius: BorderRadius.circular(16.h),
+                //   ),
+                //   child: Row(
+                //     mainAxisSize: MainAxisSize.min,
+                //     children: [
+                //       CustomImageView(
+                //         imagePath: ImageConstant.starIcon,
+                //         height: 18.adaptSize,
+                //         width: 18.adaptSize,
+                //       ),
+                //       SizedBox(width: 4.h),
+                //       Text(
+                //         '4.8',
+                //         style: CustomTextStyles.titleSmallWhiteA700,
+                //       ),
+                //     ],
+                //   ),
+                // ),
+                SizedBox(height: 230.v),
                 Container(
                   padding: EdgeInsets.symmetric(
-                    horizontal: 32.h,
-                    vertical: 21.v,
+                    horizontal: 18.h,
+                    vertical: 8.v,
                   ),
                   decoration: AppDecoration.gradient.copyWith(
                     borderRadius: BorderRadiusStyle.customBorderBL36,
+                    color: Colors.black,
                   ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      SizedBox(height: 16.v),
-                      Text(
-                        name.toString(),
-                        style: theme.textTheme.headlineSmall,
+                      // SizedBox(height: 8.v),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5.0),
+                        child: Text(
+                          name.toString(),
+                          style: theme.textTheme.headlineSmall,
+                        ),
                       ),
-                      SizedBox(height: 15.v),
+                      // SizedBox(height: 8.v),
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
@@ -117,7 +154,7 @@ class HotelsItemWidget extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(height: 10.v),
+                      // SizedBox(height: 10.v),
                       GestureDetector(
                         onTap: () {
                           // show dailog with confirmation to open address in a google map
@@ -125,18 +162,18 @@ class HotelsItemWidget extends StatelessWidget {
                             context: context,
                             builder: (BuildContext context) {
                               return AlertDialog(
-                                title: Text('KPK Smart Guide'),
-                                content: Text(
+                                title: const Text('KPK Smart Guide'),
+                                content: const Text(
                                     'Do you want to open this address in Google Maps?'),
                                 actions: <Widget>[
                                   TextButton(
-                                    child: Text('Cancel'),
+                                    child: const Text('Cancel'),
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
                                   ),
                                   TextButton(
-                                    child: Text('OK'),
+                                    child: const Text('OK'),
                                     onPressed: () async {
                                       if (address.toString().trim().isEmpty ||
                                           address == null) {
@@ -150,11 +187,37 @@ class HotelsItemWidget extends StatelessWidget {
                                           "https://www.google.com/maps/search/?api=1&query=$query";
                                       // googleUrl to uri object
                                       Uri googleUri = Uri.parse(googleUrl);
-                                      if (await canLaunchUrl(googleUri)) {
-                                        await launchUrl(googleUri);
-                                      } else {
-                                        log('Could not open the map.');
-                                      }
+                                      // if (await canLaunchUrl(googleUri)) {
+                                      //   await launchUrl(googleUri);
+                                      // } else {
+                                      //   log('Could not open the map.');
+                                      // }
+                                      launchUrl(googleUri).onError(
+                                        (error, stackTrace) {
+                                          // show dailog with error message
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                title: const Text(
+                                                    'KPK Smart Guide'),
+                                                content: const Text(
+                                                    'The address provided is not valid. Could not open the map.'),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    child: const Text('OK'),
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                          return false;
+                                        },
+                                      );
                                     },
                                   ),
                                 ],
@@ -185,29 +248,29 @@ class HotelsItemWidget extends StatelessWidget {
                                 style: CustomTextStyles.bodyMediumWhiteA700,
                               ),
                             ),
-                            Spacer(),
+                            const Spacer(),
                             // container and inside a ticket icon
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 16.h,
-                                vertical: 8.v,
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16.h),
-                                gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
-                                    appTheme.blueGray900,
-                                    appTheme.cyan900,
-                                  ],
-                                ),
-                              ),
-                              child: Text(
-                                'Details',
-                                style: CustomTextStyles.titleSmallWhiteA700,
-                              ),
-                            ),
+                            // Container(
+                            //   padding: EdgeInsets.symmetric(
+                            //     horizontal: 16.h,
+                            //     vertical: 8.v,
+                            //   ),
+                            //   decoration: BoxDecoration(
+                            //     borderRadius: BorderRadius.circular(16.h),
+                            //     gradient: LinearGradient(
+                            //       begin: Alignment.topCenter,
+                            //       end: Alignment.bottomCenter,
+                            //       colors: [
+                            //         appTheme.blueGray900,
+                            //         appTheme.cyan900,
+                            //       ],
+                            //     ),
+                            //   ),
+                            //   child: Text(
+                            //     'Details',
+                            //     style: CustomTextStyles.titleSmallWhiteA700,
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),

@@ -25,4 +25,9 @@ class HotelsService {
 
     return _hotelsCollection.get();
   }
+
+  // getHotelById method returns a Hotel object
+  Future<DocumentSnapshot<Object?>> getHotelById(String id) async {
+    return _hotelsCollection.doc(id).get();
+  }
 }

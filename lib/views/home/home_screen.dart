@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:kpksmartguide/routes/routes_name.dart';
 import 'package:kpksmartguide/theme/custom_text_style.dart';
 import 'package:kpksmartguide/theme/theme_helper.dart';
+import 'package:kpksmartguide/utils/image_constant.dart';
 import 'package:kpksmartguide/utils/size_utils.dart';
 import 'package:kpksmartguide/views/home/widgets/hotels_item_widget.dart';
 import 'package:kpksmartguide/views/home/widgets/martinezcannes_item_widget.dart';
@@ -25,9 +26,15 @@ class HomeScreen extends StatelessWidget {
             DrawerHeader(
               decoration: BoxDecoration(
                 color: theme.colorScheme.primary,
+                image: DecorationImage(
+                  image: AssetImage(ImageConstant.splashImage),
+                  fit: BoxFit.cover,
+                  colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.6), BlendMode.dstATop),
+                ),
               ),
-              child:
-                  Text("KPK Smart Guide", style: CustomTextStyles.bodyLarge18),
+              child: Text("KPK Smart Tour Guide",
+                  style: CustomTextStyles.bodyLarge18),
             ),
             ListTile(
               title: const Text("Places to Visit"),
@@ -82,10 +89,12 @@ class HomeScreen extends StatelessWidget {
           child: SingleChildScrollView(
             child: Container(
               decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [appTheme.blueGray900, appTheme.cyan900])),
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [appTheme.blueGray900, appTheme.cyan900],
+                ),
+              ),
               child: Column(
                 children: [
                   SizedBox(height: 30.v),
