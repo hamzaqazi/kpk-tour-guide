@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
                   style: CustomTextStyles.bodyLarge18),
             ),
             ListTile(
-              title: const Text("Places to Visit"),
+              title: const Text("Add Place"),
               onTap: () {
                 Get.toNamed(RoutesNames.places);
               },
@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
               thickness: 1,
             ),
             ListTile(
-              title: const Text("Hotels to stay"),
+              title: const Text("Add Hotel"),
               onTap: () {
                 Get.toNamed(RoutesNames.hotels);
               },
