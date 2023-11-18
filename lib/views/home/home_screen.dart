@@ -109,7 +109,8 @@ class HomeScreen extends StatelessWidget {
                             style: theme.textTheme.titleMedium),
                         GestureDetector(
                             onTap: () {
-                              onTapTxtSeeAll();
+                              Get.toNamed(RoutesNames.allPlaces,
+                                  arguments: {"All Places": "All Places"});
                             },
                             child: Text("See All".tr,
                                 style: CustomTextStyles.titleMediumPrimary16))
@@ -189,7 +190,8 @@ class HomeScreen extends StatelessWidget {
               Text("Hotels to stay".tr, style: theme.textTheme.titleMedium),
               GestureDetector(
                   onTap: () {
-                    onTapTxtSeeAll();
+                    Get.toNamed(RoutesNames.allHotels,
+                        arguments: {"All Hotels": "All Hotels"});
                   },
                   child: Text("See All".tr,
                       style: CustomTextStyles.titleMediumPrimary16))
@@ -197,23 +199,33 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         SizedBox(height: 16.v),
-        ListView.separated(
-          physics: NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          separatorBuilder: (context, index) {
-            return SizedBox(height: 24.v);
-          },
-          itemCount: controller.hotels.value.length,
-          itemBuilder: (context, index) {
-            return MartinezcannesItemWidget(
-              name: controller.hotels.value[index].name,
-              address: controller.hotels.value[index].address,
-              price: controller.hotels.value[index].price,
-              rating: controller.hotels.value[index].rating,
-              images: controller.hotels.value[index].images,
-            );
-          },
-        ),
+        controller.hotels.value.isEmpty
+            ? Container(
+                padding: EdgeInsets.only(right: 24.h),
+                height: 300,
+                child: Center(
+                  child: Text('No hotels found',
+                      style: CustomTextStyles.bodyMediumGray50),
+                ),
+              )
+            : ListView.separated(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                separatorBuilder: (context, index) {
+                  return SizedBox(height: 24.v);
+                },
+                itemCount: controller.hotels.value.length,
+                itemBuilder: (context, index) {
+                  return MartinezcannesItemWidget(
+                    name: controller.hotels.value[index].name,
+                    address: controller.hotels.value[index].address,
+                    price: controller.hotels.value[index].price,
+                    rating: controller.hotels.value[index].rating,
+                    images: controller.hotels.value[index].images,
+                    placeID: controller.hotels.value[index].placeID,
+                  );
+                },
+              ),
       ],
     );
   }

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kpksmartguide/theme/custom_text_style.dart';
 import 'package:kpksmartguide/theme/theme_helper.dart';
 import 'package:kpksmartguide/views/places/places_controller.dart';
 
@@ -12,7 +13,7 @@ class PlacesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Place'),
+        title: Text('Add Place', style: CustomTextStyles.titleMediumPrimary),
       ),
       body: SingleChildScrollView(
         child: Container(

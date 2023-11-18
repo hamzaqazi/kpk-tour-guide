@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:kpksmartguide/theme/custom_text_style.dart';
 import 'package:kpksmartguide/views/hotels/hotels_controller.dart';
 import 'package:kpksmartguide/views/places/places_controller.dart';
 
@@ -15,7 +16,7 @@ class HotelsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Hotel'),
+        title: Text('Add Hotel', style: CustomTextStyles.titleMediumPrimary),
       ),
       body: SingleChildScrollView(
         child: Container(

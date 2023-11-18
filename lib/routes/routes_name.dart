@@ -7,5 +7,8 @@ class RoutesNames {
   static const String login = '/login';
   static const String places = '/places';
   static const String placeDetails = '/placeDetails';
+  static const String allPlaces = '/allPlaces';
+  static const String allHotels = '/allHotels';
   static const String hotels = '/hotels';
+  static const String hotelDetails = '/hotelDetails';
 }

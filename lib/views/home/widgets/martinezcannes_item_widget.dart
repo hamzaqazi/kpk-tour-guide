@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:kpksmartguide/routes/routes_name.dart';
 import 'package:kpksmartguide/theme/app_decoration.dart';
 import 'package:kpksmartguide/theme/custom_text_style.dart';
 import 'package:kpksmartguide/theme/theme_helper.dart';
@@ -13,6 +15,7 @@ class MartinezcannesItemWidget extends StatelessWidget {
   double? price;
   double? rating;
   List<String>? images;
+  String? placeID;
 
   MartinezcannesItemWidget({
     Key? key,
@@ -21,6 +24,7 @@ class MartinezcannesItemWidget extends StatelessWidget {
     this.price,
     this.rating,
     this.images,
+    this.placeID,
   }) : super(
           key: key,
         );
@@ -108,7 +112,54 @@ class MartinezcannesItemWidget extends StatelessWidget {
           ),
           Row(
             children: [
-              Container(),
+              GestureDetector(
+                onTap: () {
+                  // Navigator.pushNamed(context, RoutesNames.hotelDetails,
+                  //     arguments: {
+                  //       'name': name,
+                  //       'address': address,
+                  //       'price': price,
+                  //       'rating': rating,
+                  //       'images': images,
+                  //       'placeID': placeID,
+                  //     });
+                  Get.offAllNamed(
+                      // preventDuplicates: false,
+                      RoutesNames.hotelDetails,
+                      arguments: {
+                        'name': name,
+                        'address': address,
+                        'price': price,
+                        'rating': rating,
+                        'images': images,
+                        'placeID': placeID,
+                      });
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16.h,
+                      vertical: 8.v,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16.h),
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          appTheme.blueGray900,
+                          appTheme.cyan900,
+                        ],
+                      ),
+                    ),
+                    child: Text(
+                      'View',
+                      style: CustomTextStyles.titleSmallWhiteA700,
+                    ),
+                  ),
+                ),
+              ),
               Spacer(),
               Padding(
                 padding: const EdgeInsets.only(right: 8.0),

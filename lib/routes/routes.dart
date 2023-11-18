@@ -1,6 +1,9 @@
 import 'package:get/get.dart';
 import 'package:kpksmartguide/routes/routes_name.dart';
+import 'package:kpksmartguide/views/all_hotels/all_hotels_screen.dart';
+import 'package:kpksmartguide/views/all_places/all_places_screen.dart';
 import 'package:kpksmartguide/views/home/home_screen.dart';
+import 'package:kpksmartguide/views/hotel_details/hotel_details_screen.dart';
 import 'package:kpksmartguide/views/hotels/hotels_screen.dart';
 import 'package:kpksmartguide/views/onboarding_one_screen/onboarding_one_screen.dart';
 import 'package:kpksmartguide/views/onboarding_three_screen/onboarding_three_screen.dart';
@@ -20,6 +23,9 @@ class AppRoutes {
     GetPage(name: RoutesNames.onBoarding3, page: () => OnboardingThreeScreen()),
     GetPage(name: RoutesNames.places, page: () => PlacesScreen()),
     GetPage(name: RoutesNames.placeDetails, page: () => PlaceDetailsScreen()),
+    GetPage(name: RoutesNames.allPlaces, page: () => AllPlacesScreen()),
+    GetPage(name: RoutesNames.allHotels, page: () => AllHotelsScreen()),
+    GetPage(name: RoutesNames.hotelDetails, page: () => HotelDetailsScreen()),
     GetPage(name: RoutesNames.hotels, page: () => HotelsScreen()),
   ];
 }
