@@ -18,9 +18,21 @@ class AllHotelsController extends GetxController {
       return _allHotels;
     } else {
       return _allHotels
-          .where((hotel) => hotel.name
-              .toLowerCase()
-              .contains(searchQuery.value.toLowerCase()))
+          .where((hotel) =>
+              hotel.name
+                  .toLowerCase()
+                  .contains(searchQuery.value.toLowerCase()) ||
+              hotel.address
+                  .toLowerCase()
+                  .contains(searchQuery.value.toLowerCase()) ||
+              hotel.price
+                  .toString()
+                  .toLowerCase()
+                  .contains(searchQuery.value.toLowerCase()) ||
+              hotel.rating
+                  .toString()
+                  .toLowerCase()
+                  .contains(searchQuery.value.toLowerCase()))
           .toList();
     }
   }
@@ -41,13 +53,14 @@ class AllHotelsController extends GetxController {
   }
 
   void viewHotel(hotel) {
-    Get.toNamed(RoutesNames.hotelDetails, arguments: {
+    Get.offAllNamed(RoutesNames.hotelDetails, arguments: {
       'name': hotel.name,
       'price': hotel.price,
       'images': hotel.images,
       'address': hotel.address,
       'rating': hotel.rating,
       'placeID': hotel.placeID,
+      'description': hotel.description,
     });
   }
 

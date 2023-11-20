@@ -12,6 +12,7 @@ class PlacesController extends GetxController {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
+  final TextEditingController specialityController = TextEditingController();
   Rx<List<File>> selectedImages = Rx<List<File>>([]);
 
   @override
@@ -55,6 +56,7 @@ class PlacesController extends GetxController {
       description: descriptionController.text,
       address: addressController.text,
       images: imageUrls,
+      speciality: specialityController.text,
     );
 
     if (place.name.isEmpty ||
@@ -75,6 +77,7 @@ class PlacesController extends GetxController {
       nameController.clear();
       descriptionController.clear();
       addressController.clear();
+      specialityController.clear();
 
       selectedImages.value = [];
     });

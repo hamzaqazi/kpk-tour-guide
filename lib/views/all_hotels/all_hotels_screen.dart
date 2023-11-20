@@ -117,12 +117,31 @@ class AllHotelsScreen extends StatelessWidget {
               padding: const EdgeInsets.only(left: 8.0),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12.0),
-                child: Image.network(
-                  hotel.images[0],
-                  width: 60.0,
-                  height: 60.0,
-                  fit: BoxFit.cover,
-                ),
+                child: hotel.images.isEmpty
+                    ? Container(
+                        width: 60.0,
+                        height: 60.0,
+                        color: Colors.grey, // Placeholder color
+                        child: const Icon(Icons.image,
+                            color: Colors.white), // Placeholder icon or text
+                      )
+                    : Image.network(
+                        hotel.images[0],
+                        width: 60.0,
+                        height: 60.0,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          // This is the placeholder or alternative widget when the image fails to load
+                          return Container(
+                            width: 60.0,
+                            height: 60.0,
+                            color: Colors.grey, // Placeholder color
+                            child: const Icon(Icons.image,
+                                color:
+                                    Colors.white), // Placeholder icon or text
+                          );
+                        },
+                      ),
               ),
             ),
             Expanded(

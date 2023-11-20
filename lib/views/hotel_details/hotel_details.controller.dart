@@ -4,6 +4,7 @@ import 'package:kpksmartguide/views/hotels/hotels_service.dart';
 
 class HotelDetailsController extends GetxController {
   RxString name = ''.obs;
+  RxString description = ''.obs;
   RxList images = [].obs;
   RxString address = ''.obs;
   RxDouble rating = 0.0.obs;
@@ -18,6 +19,7 @@ class HotelDetailsController extends GetxController {
     super.onInit();
     // Get the arguments
     name.value = Get.arguments['name'];
+    description.value = Get.arguments['description'];
     images.value = Get.arguments['images'];
     address.value = Get.arguments['address'];
     price.value = Get.arguments['price'];

@@ -35,7 +35,7 @@ class OnboardingOneScreen extends StatelessWidget {
                         width: 428.h),
                     SizedBox(height: 37.v),
                     _buildInfoSection(),
-                    SizedBox(height: 98.v),
+                    SizedBox(height: 58.v),
                     SizedBox(
                         height: 8.v,
                         child: AnimatedSmoothIndicator(
@@ -60,7 +60,7 @@ class OnboardingOneScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 43.h),
         child: Column(children: [
           Container(
-              width: 307.h,
+              width: 507.h,
               margin: EdgeInsets.only(left: 16.h, right: 17.h),
               child: Text("Travel Safely Comfortably",
                   maxLines: 2,
@@ -70,10 +70,11 @@ class OnboardingOneScreen extends StatelessWidget {
                       theme.textTheme.headlineLarge!.copyWith(height: 1.50))),
           SizedBox(height: 6.v),
           SizedBox(
-              width: 341.h,
-              child: Text("Travel safely and comfortably with KPK Smart Guide",
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
+              width: 448.h,
+              child: Text(
+                  "Embark on a journey like never before as we guide you through the breathtaking landscapes and rich cultural tapestry of Khyber Pakhtunkhwa. Our app is your companion for safe and comfortable exploration. ",
+                  maxLines: 6,
+                  overflow: TextOverflow.clip,
                   textAlign: TextAlign.center,
                   style: CustomTextStyles.bodyLarge18.copyWith(height: 1.50)))
         ]));
@@ -104,9 +105,9 @@ class OnboardingOneScreen extends StatelessWidget {
 
   /// Navigates to the letSYouInScreen when the action is triggered.
   onTapSkip() {
-    // Get.toNamed(
-    //   AppRoutes.letSYouInScreen,
-    // );
+    Get.offAllNamed(
+      RoutesNames.home,
+    );
   }
 
   /// Navigates to the onboardingTwoScreen when the action is triggered.

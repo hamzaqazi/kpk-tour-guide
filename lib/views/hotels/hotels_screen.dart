@@ -48,6 +48,22 @@ class HotelsScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
+                //description text field
+                TextField(
+                  controller: controller.descriptionController,
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(18),
+                      borderSide: const BorderSide(color: Colors.white),
+                    ),
+                    labelText: 'Description',
+                    labelStyle: const TextStyle(color: Colors.white),
+                  ),
+                  style: const TextStyle(color: Colors.white),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
                 TextField(
                   controller: controller.addressController,
                   decoration: InputDecoration(

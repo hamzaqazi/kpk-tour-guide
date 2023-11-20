@@ -1,5 +1,6 @@
 class Hotel {
   String name;
+  String? description;
   String address;
   double price;
   double? rating;
@@ -17,6 +18,7 @@ class Hotel {
     this.lon,
     this.placeID,
     required this.images,
+    this.description,
   });
 
   Map<String, dynamic> toMap() {
@@ -29,6 +31,7 @@ class Hotel {
       'lon': lon,
       'placeID': placeID,
       'images': images,
+      'description': description,
     };
   }
 
@@ -42,6 +45,7 @@ class Hotel {
       lon: map['lon'],
       placeID: map['placeID'],
       images: List<String>.from(map['images']),
+      description: map['description'],
     );
   }
 }

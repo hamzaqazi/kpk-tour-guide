@@ -102,6 +102,9 @@ class HotelDetailsScreen extends StatelessWidget {
                       Text(controller.name.value,
                           style: CustomTextStyles.bodyLarge30),
                       SizedBox(height: 8),
+                      // description section
+                      Text(controller.description.value,
+                          style: CustomTextStyles.bodyMediumGray50),
                       // rating section
                       Row(
                         children: [
@@ -319,6 +322,7 @@ class HotelDetailsScreen extends StatelessWidget {
                     price: hotel.price,
                     rating: hotel.rating,
                     placeID: hotel.placeID,
+                    description: hotel.description,
                   );
                 },
               ),

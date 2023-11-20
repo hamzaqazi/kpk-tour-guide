@@ -16,6 +16,7 @@ class MartinezcannesItemWidget extends StatelessWidget {
   double? rating;
   List<String>? images;
   String? placeID;
+  String? description;
 
   MartinezcannesItemWidget({
     Key? key,
@@ -25,6 +26,7 @@ class MartinezcannesItemWidget extends StatelessWidget {
     this.rating,
     this.images,
     this.placeID,
+    this.description,
   }) : super(
           key: key,
         );
@@ -43,15 +45,25 @@ class MartinezcannesItemWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              CustomImageView(
-                imagePath: images?.first ?? ImageConstant.splashImage,
-                height: 100.adaptSize,
-                width: 100.adaptSize,
-                radius: BorderRadius.circular(
-                  16.h,
-                ),
-                margin: EdgeInsets.symmetric(vertical: 1.v),
-              ),
+              images?.isEmpty ?? true
+                  ? CustomImageView(
+                      imagePath: ImageConstant.splashImage,
+                      height: 100.adaptSize,
+                      width: 100.adaptSize,
+                      radius: BorderRadius.circular(
+                        16.h,
+                      ),
+                      margin: EdgeInsets.symmetric(vertical: 1.v),
+                    )
+                  : CustomImageView(
+                      imagePath: images?.first ?? ImageConstant.splashImage,
+                      height: 100.adaptSize,
+                      width: 100.adaptSize,
+                      radius: BorderRadius.circular(
+                        16.h,
+                      ),
+                      margin: EdgeInsets.symmetric(vertical: 1.v),
+                    ),
               Container(
                 width: mediaQueryData.size.width * 0.7,
                 child: Column(
@@ -133,6 +145,7 @@ class MartinezcannesItemWidget extends StatelessWidget {
                         'rating': rating,
                         'images': images,
                         'placeID': placeID,
+                        'description': description,
                       });
                 },
                 child: Padding(

@@ -74,14 +74,13 @@ class _SplashPageState extends State<SplashPage>
             style: CustomTextStyles.titleMedium16,
           ),
           SizedBox(height: 23.v),
-          Text("KPK Smart Tour Guide",
-              style: theme.textTheme.headlineLarge!.copyWith(height: 1.50)),
+          Text("KPK TourVista", style: CustomTextStyles.headlineLargePrimary),
           SizedBox(height: 40.v),
           Container(
             width: 319.h,
             margin: EdgeInsets.only(right: 44.v),
             child: Text(
-              "KPK Smart Tour Guide is a mobile application that provides information about tourism in the province of Khyber Pakhtunkhwa.",
+              "KPK TourVista is a mobile application that provides information about tourism in the province of Khyber Pakhtunkhwa.",
               maxLines: 4,
               overflow: TextOverflow.ellipsis,
               style: CustomTextStyles.titleMedium16,

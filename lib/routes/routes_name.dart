@@ -11,4 +11,8 @@ class RoutesNames {
   static const String allHotels = '/allHotels';
   static const String hotels = '/hotels';
   static const String hotelDetails = '/hotelDetails';
+  static const String malls = '/malls';
+  static const String addMalls = '/addMalls';
+  static const String specialities = '/specialities';
+  static const String addSpecialities = '/addSpecialities';
 }

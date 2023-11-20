@@ -72,13 +72,13 @@ class OnboardingTwoScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style:
                       theme.textTheme.headlineLarge!.copyWith(height: 1.50))),
-          SizedBox(height: 6.v),
+          SizedBox(height: 18.v),
           SizedBox(
-              width: 341.h,
+              width: 488,
               child: Text(
-                  " Find the best and most comfortable and affordable hotels for you to stay in.",
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
+                  "Discover Khyber Pakhtunkhwa with ease! Find the best hotels that match your style and budget, ensuring a comfortable stay throughout your journey. From luxurious retreats to cozy accommodations, our app makes hotel hunting a breeze.",
+                  maxLines: 6,
+                  overflow: TextOverflow.clip,
                   textAlign: TextAlign.center,
                   style: CustomTextStyles.bodyLarge18.copyWith(height: 1.50)))
         ]));
@@ -109,9 +109,9 @@ class OnboardingTwoScreen extends StatelessWidget {
 
   /// Navigates to the letSYouInScreen when the action is triggered.
   onTapSkip() {
-    // Get.toNamed(
-    //   AppRoutes.letSYouInScreen,
-    // );
+    Get.offAllNamed(
+      RoutesNames.home,
+    );
   }
 
   /// Navigates to the onboardingThreeScreen when the action is triggered.

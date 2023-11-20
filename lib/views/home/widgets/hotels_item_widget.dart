@@ -19,6 +19,7 @@ class HotelsItemWidget extends StatelessWidget {
   final String? description;
   final String? address;
   final List<dynamic>? images;
+  final String? speciality;
 
   const HotelsItemWidget({
     Key? key,
@@ -26,6 +27,7 @@ class HotelsItemWidget extends StatelessWidget {
     this.description,
     this.address,
     this.images,
+    this.speciality,
   }) : super(key: key);
 
   @override
@@ -59,6 +61,7 @@ class HotelsItemWidget extends StatelessWidget {
                       'description': description,
                       'address': address,
                       'images': images,
+                      'speciality': speciality,
                     });
                   },
                   child: Container(

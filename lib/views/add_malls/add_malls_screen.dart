@@ -1,19 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:kpksmartguide/theme/custom_text_style.dart';
-import 'package:kpksmartguide/theme/theme_helper.dart';
+import 'package:kpksmartguide/views/add_malls/add_malls_controller.dart';
+import 'package:kpksmartguide/views/hotels/hotels_controller.dart';
 import 'package:kpksmartguide/views/places/places_controller.dart';
 
-class PlacesScreen extends StatelessWidget {
-  PlacesScreen({super.key});
-  PlacesController controller = Get.put(PlacesController());
+import '../../theme/theme_helper.dart';
+
+class AddMallsScreen extends StatelessWidget {
+  AddMallsScreen({super.key});
+  AddMallsController controller = Get.put(AddMallsController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Place', style: CustomTextStyles.titleMediumPrimary),
+        title: Text('Add Mall & Restourant',
+            style: CustomTextStyles.titleMediumPrimary),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -23,10 +28,9 @@ class PlacesScreen extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [appTheme.blueGray900, appTheme.cyan900],
-              // colors: [Colors.blueGrey, Colors.cyan],
             ),
           ),
-          child: Container(
+          child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: <Widget>[
@@ -34,13 +38,11 @@ class PlacesScreen extends StatelessWidget {
                   controller: controller.nameController,
                   // light color text will be visible on dark background
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(
+                    enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(18),
                       borderSide: const BorderSide(color: Colors.white),
                     ),
-                    hintText: 'Enter Place Name',
-                    hintStyle: const TextStyle(color: Colors.white),
-                    label: const Text('Name'),
+                    labelText: 'Name',
                     labelStyle: const TextStyle(color: Colors.white),
                   ),
                   style: const TextStyle(color: Colors.white),
@@ -48,15 +50,14 @@ class PlacesScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
+                //description text field
                 TextField(
                   controller: controller.descriptionController,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(
+                    enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(18),
                       borderSide: const BorderSide(color: Colors.white),
                     ),
-                    hintText: 'Enter Place Description',
-                    hintStyle: const TextStyle(color: Colors.white),
                     labelText: 'Description',
                     labelStyle: const TextStyle(color: Colors.white),
                   ),
@@ -68,72 +69,65 @@ class PlacesScreen extends StatelessWidget {
                 TextField(
                   controller: controller.addressController,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(
+                    enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(18),
                       borderSide: const BorderSide(color: Colors.white),
                     ),
-                    hintText: 'Enter Place Address',
-                    hintStyle: const TextStyle(color: Colors.white),
                     labelText: 'Address',
                     labelStyle: const TextStyle(color: Colors.white),
                   ),
                   style: const TextStyle(color: Colors.white),
                 ),
-                const SizedBox(height: 10),
-                // speciality text field
-                TextField(
-                  controller: controller.specialityController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(18),
-                      borderSide: const BorderSide(color: Colors.white),
-                    ),
-                    hintText: 'Enter Place Speciality',
-                    hintStyle: const TextStyle(color: Colors.white),
-                    labelText: 'Speciality',
-                    labelStyle: const TextStyle(color: Colors.white),
-                  ),
-                  style: const TextStyle(color: Colors.white),
+                const SizedBox(
+                  height: 10,
                 ),
-                const SizedBox(height: 20),
 
+                // Drop down for selecting place
+                Obx(
+                  () => DropdownButton(
+                    hint: const Text(
+                      'Select Place',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    items: controller.items.value,
+                    value: controller.selectedPlace.value.isEmpty
+                        ? null
+                        : controller.selectedPlace.value,
+                    onChanged: (value) {
+                      controller.selectedPlace.value = value.toString();
+                    },
+                  ),
+                ),
+
+                const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
                     controller.pickImages();
                   },
-                  child: const Text('Pick Images for Place'),
+                  child: const Text('Pick Image for mall'),
                 ),
                 // place selected images here in a small grid
                 Obx(
-                  () => controller.selectedImages.value.isEmpty
+                  () => controller.selectedImage.value.path.isEmpty
                       ? Container()
-                      : GridView.count(
-                          shrinkWrap: true,
-                          crossAxisCount: 4,
-                          children: List.generate(
-                            controller.selectedImages.value.length,
-                            (index) {
-                              return Container(
-                                margin: EdgeInsets.all(3),
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: FileImage(
-                                      controller.selectedImages.value[index],
-                                    ),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              );
-                            },
+                      : Container(
+                          height: 200,
+                          width: 200,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(18),
+                            image: DecorationImage(
+                              image: FileImage(controller.selectedImage.value),
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                 ),
-                // Spacer(),
+                // const Spacer(),
                 ElevatedButton(
                   onPressed: () async {
-                    await controller.addPlace();
+                    await controller.addMall();
                   },
-                  child: Text('Add Place'),
+                  child: const Text('Add Mall'),
                 ),
               ],
             ),

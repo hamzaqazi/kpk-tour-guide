@@ -9,15 +9,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:kpksmartguide/views/hotels/hotels_model.dart';
 import 'package:kpksmartguide/views/places/places_model.dart';
 import 'package:kpksmartguide/views/places/places_services.dart';
+import 'package:kpksmartguide/views/shopping/malls_model.dart';
 
-class HotelsController extends GetxController {
+class AddMallsController extends GetxController {
   // text editing controller
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController priceController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
-  final TextEditingController ratingController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
-  Rx<List<File>> selectedImages = Rx<List<File>>([]);
+  Rx<File> selectedImage = Rx<File>(File(''));
 
   RxString selectedPlace = RxString('');
 
@@ -31,7 +30,7 @@ class HotelsController extends GetxController {
     PlacesService placesService = PlacesService();
     places = await placesService.getPlaces();
     items.value = getDropDownMenuItems();
-    log(places.toString());
+    // log(places.toString());
     super.onInit();
 
     // log(places.toString());
@@ -39,67 +38,52 @@ class HotelsController extends GetxController {
 
   Future<void> pickImages() async {
     final picker = ImagePicker();
-    final pickedFiles = await picker.pickMultiImage();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
-    if (pickedFiles.isNotEmpty) {
-      selectedImages.value =
-          pickedFiles.map((file) => File(file.path)).toList();
+    if (pickedFile != null) {
+      selectedImage.value = File(pickedFile.path);
     }
   }
 
-  Future<List<String>> uploadImagesToStorage(List<File> files) async {
-    final List<String> imageUrls = [];
+  Future<String> uploadImagesToStorage(File file) async {
+    String imageUrl = '';
 
-    for (File file in files) {
-      final storageReference = FirebaseStorage.instance
-          .ref()
-          .child('images/hotels/${DateTime.now().millisecondsSinceEpoch}');
-      final uploadTask = storageReference.putFile(file);
-      final TaskSnapshot snapshot = await uploadTask;
-      final String downloadUrl = await snapshot.ref.getDownloadURL();
-      imageUrls.add(downloadUrl);
-    }
+    final storageReference = FirebaseStorage.instance
+        .ref()
+        .child('images/malls/${DateTime.now().millisecondsSinceEpoch}');
+    final uploadTask = storageReference.putFile(file);
+    final TaskSnapshot snapshot = await uploadTask;
+    final String downloadUrl = await snapshot.ref.getDownloadURL();
+    imageUrl = downloadUrl;
 
-    return imageUrls;
+    return imageUrl;
   }
 
-  Future<void> addHotel() async {
+  Future<void> addMall() async {
     // Upload images to Firebase Storage
-    final List<String> imageUrls =
-        await uploadImagesToStorage(selectedImages.value);
+    final String imageUrl = await uploadImagesToStorage(selectedImage.value);
 
-    Hotel hotel = Hotel(
+    MallsModel mall = MallsModel(
       name: nameController.text,
-      price: double.parse(priceController.text),
-      rating: double.parse(ratingController.text),
       address: addressController.text,
-      images: imageUrls,
+      image: imageUrl,
       placeID: selectedPlace.value,
       description: descriptionController.text,
     );
 
-    if (hotel.name.isEmpty ||
-        hotel.price.toString().isEmpty ||
-        hotel.address.isEmpty) {
-      // Handle empty fields
-      return;
-    }
-
     DocumentReference documentReference =
-        FirebaseFirestore.instance.collection('hotels').doc(hotel.name);
+        FirebaseFirestore.instance.collection('malls').doc(mall.name);
 
     // create map
 
-    documentReference.set(hotel.toMap()).whenComplete(() {
+    documentReference.set(mall.toMap()).whenComplete(() {
       print("${nameController.text} created");
       // Clear text fields and selected images
       nameController.clear();
-      priceController.clear();
       addressController.clear();
-      ratingController.clear();
       descriptionController.clear();
 
-      selectedImages.value = [];
+      selectedImage.value = File('');
     });
 
     // Show a success message or navigate to a new screen

@@ -199,6 +199,94 @@ class PlaceDetailsScreen extends StatelessWidget {
                 ),
                 // opne google map button
               ),
+              // Specialities section
+              Padding(
+                padding: const EdgeInsets.only(left: 16.0),
+                child:
+                    Text('Specialities', style: CustomTextStyles.bodyLarge30),
+              ),
+              // specialty text section
+              Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Obx(
+                    () => controller.matchSpecialities.value.isEmpty
+                        ? Center(
+                            child: Text(
+                              'No Specialities Found',
+                              style: CustomTextStyles.titleMediumPrimary,
+                            ),
+                          )
+                        : Row(
+                            children: [
+                              Expanded(
+                                child: Wrap(
+                                  spacing: 8,
+                                  runSpacing: 8,
+                                  children: controller.matchSpecialities.value
+                                      .map(
+                                        (e) => Chip(
+                                          label: Text(
+                                            e.description.toString(),
+                                            style: CustomTextStyles
+                                                .bodyLargePrimary,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          backgroundColor:
+                                              theme.colorScheme.inversePrimary,
+                                        ),
+                                      )
+                                      .toList(),
+                                ),
+                              ),
+                            ],
+                          ),
+                  )),
+
+              // malls to visit section
+              Padding(
+                padding: const EdgeInsets.only(left: 16.0),
+                child: Text('Malls & Restaurants ',
+                    style: CustomTextStyles.bodyLarge30),
+              ),
+              // malls text section
+              Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Obx(
+                    () => controller.matchMalls.value.isEmpty
+                        ? Center(
+                            child: Text(
+                              'No Malls or Restaurants Found',
+                              style: CustomTextStyles.titleMediumPrimary,
+                            ),
+                          )
+                        : Row(
+                            children: [
+                              Expanded(
+                                child: Wrap(
+                                  spacing: 8,
+                                  runSpacing: 8,
+                                  children: controller.matchMalls.value
+                                      .map(
+                                        (e) => Chip(
+                                          label: Text(
+                                            e.name.toString(),
+                                            style: CustomTextStyles
+                                                .bodyLargePrimary,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          backgroundColor:
+                                              theme.colorScheme.inversePrimary,
+                                        ),
+                                      )
+                                      .toList(),
+                                ),
+                              ),
+                            ],
+                          ),
+                  )),
+
               SizedBox(height: 16),
               // Hotels to stay section
               Obx(

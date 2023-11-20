@@ -66,12 +66,12 @@ class OnboardingThreeScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style:
                       theme.textTheme.headlineLarge!.copyWith(height: 1.50))),
-          SizedBox(height: 5.v),
+          SizedBox(height: 18.v),
           SizedBox(
               width: 341.h,
               child: Text(
-                  "Let's discover the Khyber Pakhtunkhwa with us. We will help you to find the best places to visit in KPK.",
-                  maxLines: 3,
+                  "Ready for an adventure? Let's Go takes the hassle out of planning. Explore Khyber Pakhtunkhwa effortlessly, with curated itineraries, local insights, and hidden gems at your fingertips.you're a history buff, nature enthusiast, or foodie.",
+                  maxLines: 6,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
                   style: CustomTextStyles.bodyLarge18.copyWith(height: 1.50)))
@@ -103,9 +103,7 @@ class OnboardingThreeScreen extends StatelessWidget {
 
   /// Navigates to the letSYouInScreen when the action is triggered.
   onTapSkip() {
-    // Get.toNamed(
-    //   AppRoutes.letSYouInScreen,
-    // );
+    Get.offAllNamed(RoutesNames.home);
   }
 
   /// Navigates to the letSYouInScreen when the action is triggered.
