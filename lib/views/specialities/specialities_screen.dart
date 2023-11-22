@@ -60,15 +60,30 @@ class SpecialitiesScreen extends StatelessWidget {
                       ),
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(left: 16.0),
                           child: Text(
                             'Search by categories',
-                            style: CustomTextStyles.bodyLarge25,
+                            style: CustomTextStyles.bodyLarge18,
                           ),
                         ),
+
+                        // reset button
+                        Padding(
+                          padding: const EdgeInsets.only(right: 16.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              controller.searchQuery.value = '';
+                            },
+                            child: Icon(
+                              Icons.refresh,
+                              color: theme.primaryColor,
+                            ),
+                          ),
+                        ),
+                        const Spacer(),
                         Padding(
                           padding: const EdgeInsets.only(right: 16.0),
                           child: Text(
@@ -117,7 +132,7 @@ class SpecialitiesScreen extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(right: 16.0),
                           child: Text(
-                            '${controller.specialities.value.length} specialities',
+                            '${controller.filteredSpecialities.length} specialities',
                             style: CustomTextStyles.bodyLarge18,
                           ),
                         ),
