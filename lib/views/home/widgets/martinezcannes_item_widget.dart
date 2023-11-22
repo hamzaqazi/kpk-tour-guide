@@ -174,30 +174,30 @@ class MartinezcannesItemWidget extends StatelessWidget {
                 ),
               ),
               Spacer(),
-              Padding(
-                padding: const EdgeInsets.only(right: 8.0),
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 16.h,
-                    vertical: 8.v,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16.h),
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        appTheme.blueGray900,
-                        appTheme.cyan900,
-                      ],
-                    ),
-                  ),
-                  child: Text(
-                    'Book Now',
-                    style: CustomTextStyles.titleSmallWhiteA700,
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(right: 8.0),
+              //   child: Container(
+              //     padding: EdgeInsets.symmetric(
+              //       horizontal: 16.h,
+              //       vertical: 8.v,
+              //     ),
+              //     decoration: BoxDecoration(
+              //       borderRadius: BorderRadius.circular(16.h),
+              //       gradient: LinearGradient(
+              //         begin: Alignment.topCenter,
+              //         end: Alignment.bottomCenter,
+              //         colors: [
+              //           appTheme.blueGray900,
+              //           appTheme.cyan900,
+              //         ],
+              //       ),
+              //     ),
+              //     child: Text(
+              //       'Book Now',
+              //       style: CustomTextStyles.titleSmallWhiteA700,
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ],

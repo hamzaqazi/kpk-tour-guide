@@ -65,6 +65,51 @@ class SpecialitiesScreen extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(left: 16.0),
                           child: Text(
+                            'Search by categories',
+                            style: CustomTextStyles.bodyLarge25,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 16.0),
+                          child: Text(
+                            '${controller.categories.value.length} categories',
+                            style: CustomTextStyles.bodyLarge18,
+                          ),
+                        ),
+                      ],
+                    ),
+                    // search by category chips
+                    Container(
+                      height: 50,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: controller.categories.value.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                controller.searchQuery.value =
+                                    controller.categories.value[index];
+                              },
+                              child: Chip(
+                                backgroundColor: Colors.grey[900],
+                                label: Text(
+                                  controller.categories.value[index],
+                                  style: CustomTextStyles.bodyMediumGray50,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 16.0),
+                          child: Text(
                             'Specialities',
                             style: CustomTextStyles.bodyLarge30,
                           ),
@@ -78,6 +123,7 @@ class SpecialitiesScreen extends StatelessWidget {
                         ),
                       ],
                     ),
+
                     Expanded(
                       child: ListView.builder(
                         itemCount: controller.filteredSpecialities
@@ -86,7 +132,7 @@ class SpecialitiesScreen extends StatelessWidget {
                           var speciality =
                               controller.filteredSpecialities[index];
                           return Container(
-                            height: 380,
+                            // height: 380,
                             margin: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(25),

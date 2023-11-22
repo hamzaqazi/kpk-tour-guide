@@ -11,6 +11,8 @@ class SpecialityController extends GetxController {
   RxString searchQuery = ''.obs;
   // list of malls
   Rx<List<Speciality>> specialities = Rx<List<Speciality>>([]);
+  // list of Strings of categories
+  Rx<List<String>> categories = Rx<List<String>>([]);
 
   List<Speciality> get filteredSpecialities {
     if (searchQuery.value.isEmpty) {
@@ -23,6 +25,9 @@ class SpecialityController extends GetxController {
                   .contains(searchQuery.value.toLowerCase()) ||
               speciality.placeID
                   .toLowerCase()
+                  .contains(searchQuery.value.toLowerCase()) ||
+              speciality.category!
+                  .toLowerCase()
                   .contains(searchQuery.value.toLowerCase()))
           .toList();
     }
@@ -32,7 +37,17 @@ class SpecialityController extends GetxController {
   void onInit() async {
     // get malls
     specialities.value = await specialityService.getSpecialities();
-    log(specialities.value.toString());
+    if (specialities.value.isNotEmpty) {
+      // get categories
+      specialities.value.forEach((element) {
+        categories.value.add(element.category!);
+      });
+      log(categories.value.toString());
+      // remove duplicates
+      categories.value = categories.value.toSet().toList();
+      log(categories.value.toString());
+    }
+    // log(specialities.value.toString());
     super.onInit();
   }
 }

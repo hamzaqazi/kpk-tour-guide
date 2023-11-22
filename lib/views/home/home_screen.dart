@@ -178,7 +178,7 @@ class HomeScreen extends StatelessWidget {
                     content: TextField(
                       controller: controller.passwordController,
                       obscureText: true,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Password',
                       ),
@@ -234,50 +234,60 @@ class HomeScreen extends StatelessWidget {
         ),
         body: SizedBox(
           width: mediaQueryData.size.width,
-          child: SingleChildScrollView(
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [appTheme.blueGray900, appTheme.cyan900],
-                ),
-              ),
-              child: Column(
-                children: [
-                  SizedBox(height: 30.v),
-                  Padding(
-                    padding: EdgeInsets.only(right: 24.h, left: 24.h),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Places to visit".tr,
-                            style: theme.textTheme.titleMedium),
-                        GestureDetector(
-                            onTap: () {
-                              Get.toNamed(RoutesNames.allPlaces,
-                                  arguments: {"All Places": "All Places"});
-                            },
-                            child: Text("See All".tr,
-                                style: CustomTextStyles.titleMediumPrimary16))
-                      ],
-                    ),
+          child: Scrollbar(
+            interactive: true,
+            thumbVisibility: true,
+            // trackVisibility: true,
+            radius: const Radius.circular(16),
+            thickness: 6,
+            child: SingleChildScrollView(
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      appTheme.blueGray900,
+                      appTheme.cyan900,
+                    ],
                   ),
-                  SizedBox(height: 16.v),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Padding(
-                      padding: EdgeInsets.all(5.h),
-                      child: Column(
+                ),
+                child: Column(
+                  children: [
+                    SizedBox(height: 30.v),
+                    Padding(
+                      padding: EdgeInsets.only(right: 24.h, left: 24.h),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          _buildHotels(),
-                          SizedBox(height: 34.v),
-                          Obx(() => _buildRecentlyBooked()),
+                          Text("Places to visit".tr,
+                              style: theme.textTheme.titleMedium),
+                          GestureDetector(
+                              onTap: () {
+                                Get.toNamed(RoutesNames.allPlaces,
+                                    arguments: {"All Places": "All Places"});
+                              },
+                              child: Text("See All".tr,
+                                  style: CustomTextStyles.titleMediumPrimary16))
                         ],
                       ),
                     ),
-                  ),
-                ],
+                    SizedBox(height: 16.v),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: EdgeInsets.all(5.h),
+                        child: Column(
+                          children: [
+                            _buildHotels(),
+                            SizedBox(height: 34.v),
+                            Obx(() => _buildRecentlyBooked()),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

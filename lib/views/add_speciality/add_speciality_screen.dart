@@ -46,7 +46,25 @@ class AddSpecialityScreen extends StatelessWidget {
                   ),
                   style: const TextStyle(color: Colors.white),
                 ),
-                SizedBox(
+                const SizedBox(
+                  height: 10,
+                ),
+                // category text field
+                TextField(
+                  controller: controller.categoryController,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(18),
+                      borderSide: const BorderSide(color: Colors.white),
+                    ),
+                    hintText: 'Enter Category',
+                    hintStyle: const TextStyle(color: Colors.white),
+                    label: const Text('Category'),
+                    labelStyle: const TextStyle(color: Colors.white),
+                  ),
+                  style: const TextStyle(color: Colors.white),
+                ),
+                const SizedBox(
                   height: 10,
                 ),
                 //description text field
@@ -110,7 +128,7 @@ class AddSpecialityScreen extends StatelessWidget {
                   onPressed: () async {
                     await controller.addSpeciality();
                   },
-                  child: Text('Add Speciality'),
+                  child: const Text('Add Speciality'),
                 ),
               ],
             ),

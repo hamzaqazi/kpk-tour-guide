@@ -1,6 +1,7 @@
 class Speciality {
   String title;
   String? description;
+  String? category;
   String image;
   String placeID;
 
@@ -9,6 +10,7 @@ class Speciality {
     required this.image,
     required this.placeID,
     this.description,
+    this.category,
   });
 
   Map<String, dynamic> toMap() {
@@ -17,6 +19,7 @@ class Speciality {
       'Image': image,
       'placeID': placeID,
       'description': description,
+      'category': category,
     };
   }
 
@@ -26,6 +29,7 @@ class Speciality {
       image: map['Image'],
       placeID: map['placeID'],
       description: map['description'],
+      category: map['category'],
     );
   }
 }

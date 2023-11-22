@@ -13,6 +13,7 @@ class AddSpecialityController extends GetxController {
   // text editing controller
   final TextEditingController nameController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController categoryController = TextEditingController();
 
   Rx<File> selectedImage = Rx<File>(File(''));
   RxString selectedPlace = RxString('');
@@ -75,6 +76,7 @@ class AddSpecialityController extends GetxController {
       image: imageUrl,
       placeID: selectedPlace.value,
       description: descriptionController.text,
+      category: categoryController.text,
     );
 
     DocumentReference documentReference = FirebaseFirestore.instance
@@ -89,6 +91,8 @@ class AddSpecialityController extends GetxController {
       nameController.clear();
       descriptionController.clear();
       selectedImage.value = File('');
+      selectedPlace.value = '';
+      categoryController.clear();
     });
 
     // Show a success message or navigate to a new screen

@@ -80,9 +80,11 @@ class AllPlacesScreen extends StatelessWidget {
 
                 Expanded(
                   child: Scrollbar(
+                    interactive: true,
                     thumbVisibility: true,
-                    trackVisibility: true,
-                    radius: const Radius.circular(18.0),
+                    // trackVisibility: true,
+                    radius: const Radius.circular(16),
+                    thickness: 6,
                     child: ListView.builder(
                       itemCount: controller.filteredPlaces.length,
                       itemBuilder: (context, index) {
