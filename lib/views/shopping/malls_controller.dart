@@ -17,9 +17,13 @@ class MallsRestController extends GetxController {
       return malls.value;
     } else {
       return malls.value
-          .where((hotel) => hotel.name
-              .toLowerCase()
-              .contains(searchQuery.value.toLowerCase()))
+          .where((hotel) =>
+              hotel.name
+                  .toLowerCase()
+                  .contains(searchQuery.value.toLowerCase()) ||
+              hotel.placeID
+                  .toLowerCase()
+                  .contains(searchQuery.value.toLowerCase()))
           .toList();
     }
   }

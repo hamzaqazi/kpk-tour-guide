@@ -57,14 +57,33 @@ class MallsRestScreen extends StatelessWidget {
                         style: const TextStyle(color: Colors.white),
                       ),
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 16.0),
+                          child: Text(
+                            'Malls',
+                            style: CustomTextStyles.bodyLarge30,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 16.0),
+                          child: Text(
+                            '${controller.filteredMalls.length} Malls & Museums',
+                            style: CustomTextStyles.bodyLarge18,
+                          ),
+                        ),
+                      ],
+                    ),
                     Expanded(
                       child: ListView.builder(
                         itemCount: controller.filteredMalls
                             .length, // Replace with the actual number of cards you want to display
                         itemBuilder: (context, index) {
-                          var mall = controller.malls.value[index];
+                          var mall = controller.filteredMalls[index];
                           return Container(
-                            height: 450,
+                            // height: 450,
                             margin: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(25),
