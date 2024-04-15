@@ -19,12 +19,13 @@ class HotelDetailsController extends GetxController {
     super.onInit();
     // Get the arguments
     name.value = Get.arguments['name'];
-    description.value = Get.arguments['description'];
+    description.value =
+        Get.arguments['description'] ?? "Description is not available";
     images.value = Get.arguments['images'];
     address.value = Get.arguments['address'];
     price.value = Get.arguments['price'];
     rating.value = Get.arguments['rating'];
-    placeID.value = Get.arguments['placeID'];
+    placeID.value = Get.arguments['placeID'] ?? '';
 
     // get the hotels from the placeID
     hotels.value = await hotelsService.getHotels();
