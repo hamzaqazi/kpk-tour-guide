@@ -245,8 +245,8 @@ class HotelDetailsScreen extends StatelessWidget {
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: theme.colorScheme.primary,
-                          onPrimary: theme.colorScheme.onPrimary,
+                          foregroundColor: theme.colorScheme.onPrimary,
+                          backgroundColor: theme.colorScheme.primary,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
